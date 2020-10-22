@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Edit post')
+
 @section('content')
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -20,6 +22,12 @@
     <div class="form-group">
       <label for="body">Body</label>
       <textarea class="form-control" name="body" id="body" cols="30" rows="10">{{$post->body}}</textarea>
+    </div>
+    <div class="form-group">
+      @foreach ($tags as $tag)
+        <label for="tag-{{$tag->name}}" class="ml-3">{{$tag->name}}</label>
+        <input type="checkbox" name="tags[]" id="tag-{{$tag->name}}" value="{{$tag->id}}" {{$post->tags->contains($tag->id) ? 'checked' : ''}}>
+      @endforeach
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
   </form>

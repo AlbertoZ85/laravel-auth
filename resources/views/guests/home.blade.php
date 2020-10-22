@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Homepage')
+
 @section('content')
     <div class="display-4 p-5 text-center">
         Benvenuto nel mio fantastico blog

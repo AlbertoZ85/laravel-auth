@@ -10,8 +10,8 @@
     </div>
     @endif
 
-    <table class="table table-light table-striped">
-        <thead>
+    <table class="table table-bordered table-striped">
+        <thead class="bg-primary">
             <tr>
                 <th>ID</th>
                 <th>Title</th>

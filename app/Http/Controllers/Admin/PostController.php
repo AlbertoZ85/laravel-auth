@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -30,7 +31,8 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('admin.posts.create');
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('tags'));
     }
 
     /**
@@ -45,9 +47,14 @@ class PostController extends Controller {
         $data['user_id'] = Auth::id();
         $data['slug'] = Str::slug($data['title'], '-');
 
-        $newPost = Post::create($data);
+        $newPost = new Post;
+        $newPost->fill($data);
+        $result = $newPost->save();
+        // $newPost = Post::create($data);
 
-        if ($newPost) {
+        $newPost->tags()->attach($data['tags']);
+
+        if ($result) {
             return redirect()->route('posts.index');
         }
     }
@@ -69,7 +76,8 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post) {
-        return view('admin.posts.edit', compact('post'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'tags'));
     }
 
     /**
@@ -83,6 +91,9 @@ class PostController extends Controller {
         $data = $request->all();
         $request->validate($this->validation);
         $data['slug'] = Str::slug($data['title']);
+
+        // sync tags
+        $post->tags()->sync($data['tags']);
         $post->update($data);
 
         // scrittura alternativa a redirect()->route()
