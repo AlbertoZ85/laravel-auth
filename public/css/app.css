@@ -10903,3 +10903,19 @@ a.text-dark:focus {
   }
 }
 
+.avatar {
+  width: 300px;
+}
+
+.img-az {
+  max-height: 260px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.table th,
+.table td {
+  vertical-align: unset;
+  text-align: center;
+}
+

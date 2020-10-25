@@ -2,21 +2,27 @@
 @section('title', 'Edit post')
 
 @section('content')
-@if ($errors->any())
+<div class="container p-3">
+
+  @if ($errors->any())
     <div class="alert alert-danger">
         @foreach ($errors->all() as $error)
           <p>{{$error}}</p>
         @endforeach
     </div>
-@endif
-
-<div class="container p-3">
-  <form action="{{route('posts.update', $post->id)}}" method="post">
+  @endif
+  
+  <form action="{{route('posts.update', $post->id)}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
 
+    <img src="{{Storage::url($post->img)}}" class="avatar" alt="{{$post->title}}">
     <div class="form-group">
-      <label for="title">Titolo</label>
+      <label for="img">Upload image</label>
+      <input type="file" id="img" name="img" class="form-control-file" accept="image/*">
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
       <input type="text" id="title" name="title" class="form-control" value="{{$post->title}}">
     </div>
     <div class="form-group">

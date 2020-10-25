@@ -13,13 +13,17 @@
 @endif
 
 <div class="container p-3">
-  <form action="{{route('posts.store')}}" method="post">
+  <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     {{-- @method('POST') --}}
 
     <div class="form-group">
-      <label for="title">Titolo</label>
+      <label for="title">Title</label>
       <input type="text" id="title" name="title" class="form-control" placeholder="Inserisci il titolo">
+    </div>
+    <div class="form-group">
+      <label for="img">Upload image</label>
+      <input type="file" id="img" name="img" class="form-control-file" accept="image/*">
     </div>
     <div class="form-group">
       <label for="body">Body</label>

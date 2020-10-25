@@ -6,3 +6,21 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.avatar {
+    width: 300px;
+}
+
+.img-az {
+    max-height: 260px;
+    object-fit: cover;
+}
+
+.table {
+
+    th,
+    td {
+        vertical-align: unset;
+        text-align: center;
+    }
+}

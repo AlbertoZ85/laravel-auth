@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Your posts')
+@section('title', 'My posts')
 
 @section('content')
 <div class="container p-3">
@@ -14,17 +14,17 @@
         <thead class="bg-primary">
             <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th></th>
-                <th></th>
+                <th>Title - Preview</th>
+                <th colspan="3"></th>
             </tr>
         </thead>
         <tbody>
             @foreach ($posts as $post)
                 <tr>
                     <th scope="row">{{$post->id}}</th>
-                    <td>{{$post->title}}</td>
-                    <td><a href="{{route('posts.edit', $post->id)}}" class="btn btn-primary">Edit</a></td>
+                    <td>{{$post->title}} - <small class="text-muted">{{Str::substr($post->body, 0, 150). "..."}}</small></td>
+                    {{-- <td><a href="{{route('posts.show', $post->id)}}" class="btn btn-primary">Show</a></td> --}}
+                    <td><a href="{{route('posts.edit', $post->id)}}" class="btn btn-success">Edit</a></td>
                     <td>
                         <form action="{{route('posts.destroy', $post->id)}}" method="post">
                             @csrf
