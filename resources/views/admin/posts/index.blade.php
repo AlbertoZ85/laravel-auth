@@ -14,7 +14,8 @@
         <thead class="bg-primary">
             <tr>
                 <th>ID</th>
-                <th>Title - Preview</th>
+                <th>Title</th>
+                <th>Preview</th>
                 <th colspan="3"></th>
             </tr>
         </thead>
@@ -22,8 +23,9 @@
             @foreach ($posts as $post)
                 <tr>
                     <th scope="row">{{$post->id}}</th>
-                    <td>{{$post->title}} - <small class="text-muted">{{Str::substr($post->body, 0, 150). "..."}}</small></td>
-                    {{-- <td><a href="{{route('posts.show', $post->id)}}" class="btn btn-primary">Show</a></td> --}}
+                    <th scope="row">{{$post->title}}</td>
+                    <td>{{Str::substr($post->body, 0, 100). "..."}}</td>
+                    <td><a href="{{route('guest.posts.show', $post->slug)}}" class="btn btn-primary">Show</a></td>
                     <td><a href="{{route('posts.edit', $post->id)}}" class="btn btn-success">Edit</a></td>
                     <td>
                         <form action="{{route('posts.destroy', $post->id)}}" method="post">

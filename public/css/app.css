@@ -10913,9 +10913,3 @@ a.text-dark:focus {
      object-fit: cover;
 }
 
-.table th,
-.table td {
-  vertical-align: unset;
-  text-align: center;
-}
-
